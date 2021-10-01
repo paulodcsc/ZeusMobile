@@ -2,16 +2,30 @@ import React from 'react'
 import {
   View,
   SafeAreaView,
-  Text,
-  TouchableHighlight,
   StyleSheet,
   TextInput,
-  Image
+  Image,
+  Button,
+  Text
 } from 'react-native'
 
-const UselessTextInput = () => {
+export default function Login({ navigation }) {
   const [email, onChangeEmail] = React.useState(null)
   const [password, onChangePassword] = React.useState(null)
+
+  const main = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainScreen' }]
+    })
+  }
+
+  const register = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'RegisterScreen' }]
+    })
+  }
 
   return (
     <SafeAreaView style={styles.mainArea}>
@@ -35,16 +49,16 @@ const UselessTextInput = () => {
         keyboardType="default"
         secureTextEntry={true}
       />
-      <TouchableHighlight>
-        <View style={styles.button}>
-          <Text>Entrar</Text>
-        </View>
-      </TouchableHighlight>
-      <TouchableHighlight>
-        <View style={styles.button}>
-          <Text>Cadastrar</Text>
-        </View>
-      </TouchableHighlight>
+      <View style={styles.button}>
+        <Button title="Entrar" color="#FFBD19" onPress={() => main()} />
+      </View>
+      <View style={styles.button}>
+        <Button
+          title="Cadastrar"
+          color="#FFBD19"
+          onPress={() => navigation.navigate('RegisterScreen')}
+        />
+      </View>
     </SafeAreaView>
   )
 }
@@ -58,7 +72,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#FFBD19',
     marginTop: 10,
     padding: 10
   },
@@ -75,5 +88,3 @@ const styles = StyleSheet.create({
     marginBottom: 30
   }
 })
-
-export default UselessTextInput

@@ -9,14 +9,28 @@ import {
   Image
 } from 'react-native'
 
-const UselessTextInput = () => {
+export default function Login({ navigation }) {
   const [email, onChangeEmail] = React.useState(null)
   const [password, onChangePassword] = React.useState(null)
+
+  const welcome = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'WelcomeScreen' }]
+    })
+  }
+
+  const main = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'MainScreen' }]
+    })
+  }
 
   return (
     <SafeAreaView style={styles.mainArea}>
       <View>
-        <TouchableHighlight style={styles.backButton}>
+        <TouchableHighlight style={styles.backButton} onPress={() => welcome()}>
           <Text>◄</Text>
         </TouchableHighlight>
         <Text style={styles.header}>Cadastro</Text>
@@ -36,8 +50,8 @@ const UselessTextInput = () => {
         keyboardType="default"
         secureTextEntry={true}
       />
-      <TouchableHighlight>
-        <View style={styles.button}>
+      <TouchableHighlight style={styles.button} onPress={() => main()}>
+        <View>
           <Text>Finalizar</Text>
         </View>
       </TouchableHighlight>
@@ -73,5 +87,3 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-
-export default UselessTextInput
